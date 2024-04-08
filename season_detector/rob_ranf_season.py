@@ -71,7 +71,7 @@ def get_season(day_of_year: int) -> str:
         return "Winter"
 
 
-# The main() function is the program entrypoint.
+# The main() function is the program entry point.
 def main():
     again = "y"
     while again == "y":
