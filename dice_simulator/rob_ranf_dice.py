@@ -90,6 +90,8 @@ def main():
         has_value = check_rolls_for_value(rolls_list, value_to_check)
         if has_value > 0:
             print(f"Got {value_to_check} in {has_value} rolls.")
+        else:
+            print(f"Sorry! No {value_to_check} found!")
 
         again = input("Roll again? (y/n): ").lower()
     print("Goodbye!")
