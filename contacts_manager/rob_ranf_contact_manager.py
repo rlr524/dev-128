@@ -22,20 +22,73 @@ def list_contacts(contacts: dict):
         print(f"{contacts.index(c) + 1}. {c}")
 
 
-def view_contacts():
-    return "view"
+def view_contacts(contacts: dict):
+    viewed_contact = input("Enter the name: ").capitalize()
+    if viewed_contact in contacts:
+        print(f"Viewing contact for {viewed_contact}:\n")
+        print(f"address: {contacts[viewed_contact].get('address', 'none')}")
+        print(f"company: {contacts[viewed_contact].get('company', 'none')}")
+        print(f"landline: {contacts[viewed_contact].get('landline', 'none')}")
+        print(f"mobile: {contacts[viewed_contact].get('mobile', 'none')}")
+        print(f"state: {contacts[viewed_contact].get('state', 'none')}")
+    else:
+        print("No contact found for that name.")
 
 
-def add_contact():
-    return "add"
+def add_contact(contacts: dict):
+    name = input("Enter the name for the new contact: ").capitalize()
+
+    if name in contacts:
+        print(f"You already have a {name} in your contacts. Please enter "
+              f"them by a nickname or another name\n")
+    else:
+        address = input("Enter the address for the new contact: ").title()
+        company = input("Enter the company for the new contact (hit enter if "
+                        "none): ").title()
+        landline = input("Enter the landline number for the new contact (hit enter if "
+                         "none): ")
+        mobile = input("Enter the mobile number for the new contact (hit enter if "
+                       "none): ")
+
+        if company == "":
+            company = "none"
+        if landline == "":
+            landline = "none"
+        if mobile == "":
+            mobile = "none"
+
+        contacts[name] = {
+            "address": address,
+            "company": company,
+            "landline": landline,
+            "mobile": mobile
+        }
+
+        print(f"Contact {name} has been added.")
 
 
-def delete_contact():
-    return "delete"
+def delete_contact(contacts: dict):
+    contact = input("Enter the name: ").capitalize()
+    if contact in contacts:
+        contacts.pop(contact)
+        print(f"Contact for {contact} has been deleted.\n")
+    else:
+        print("There is no contact by that name.\n")
 
 
-def display_fields():
-    return "fields"
+def display_fields(contacts: dict):
+    field = input("Please enter the field you want to view: ")
+    fields = []
+    for contact in contacts:
+        field_check = contacts[contact].get(field)
+        fields.append(field_check)
+
+    if len(fields) == 0:
+        print("No contact found with that field.")
+    else:
+        print(f"Printing {field} for all contacts")
+        for contact in contacts.keys():
+            print(f"{contact}: {contacts[contact].get(field)}")
 
 
 def main():
@@ -64,13 +117,13 @@ def main():
         if user_command == "list":
             list_contacts(contacts)
         elif user_command == "view":
-            view_contacts()
+            view_contacts(contacts)
         elif user_command == "add":
-            add_contact()
+            add_contact(contacts)
         elif user_command == "del":
-            delete_contact()
+            delete_contact(contacts)
         elif user_command == "field":
-            display_fields()
+            display_fields(contacts)
         elif user_command == "exit":
             print("Goodbye!")
             break
