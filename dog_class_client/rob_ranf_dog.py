@@ -1,3 +1,9 @@
+# Assignment: DEV128 Dog class and client
+# Class: DEV 128 11065
+# Date 4/22/2024
+# Author: Rob Ranf
+# Description: A Dog class and some client code that interacts with a Dog object.
+
 class Dog:
     name: str
     color: str
